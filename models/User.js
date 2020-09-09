@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const randtoken = require('rand-token');
 
-const token = randtoken.generate(16);
-
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
@@ -20,7 +18,7 @@ const UserSchema = mongoose.Schema({
   },
   token: {
     type: String,
-    default: token
+    default: () => randtoken.generate(32)
   }
 });
 
