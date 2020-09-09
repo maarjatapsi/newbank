@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require('mongoose-unique-validator');
 const randtoken = require('rand-token');
 
 const UserSchema = mongoose.Schema({
@@ -9,8 +10,8 @@ const UserSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, "Username required"],
-    unique: [true, "User already exists"],
-    dropDups: [true, "User already exists"]
+    unique: [true],
+    dropDups: [true]
   },
   password: {
     type: String,
@@ -22,6 +23,7 @@ const UserSchema = mongoose.Schema({
   }
 });
 
-
+// Apply the uniqueValidator plugin to userSchema.
+UserSchema.plugin(uniqueValidator, { message: 'Username already exists!' });
 
 module.exports = mongoose.model("Users", UserSchema);
