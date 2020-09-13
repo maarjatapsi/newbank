@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001"
+      "url": "http://localhost:3000"
     },
     {
       "url": "http://petstore.swagger.io/v2"
@@ -273,9 +273,6 @@
               "username": {
                 "type": "string"
               },
-              "balanceId": {
-                "type": "string"
-              },
               "token": {
                 "type": "string"
               },
@@ -288,10 +285,9 @@
         "example": {
           "user": {
             "_id": "23",
-            "balanceId": "5",
             "username": "user1",
             "token": "9f8e22760d6a96881f9450ce4fb82e27",
-            "name": "Tatjana Volkov"
+            "name": "Bob"
           }
         }
       },
@@ -331,7 +327,11 @@
         ],
         "type": "object",
         "properties": {
-          "id": {
+          "_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
             "type": "integer",
             "format": "int64"
           },
@@ -347,7 +347,11 @@
       "UserBalance": {
         "type": "object",
         "properties": {
-          "id": {
+          "_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
             "type": "integer",
             "format": "int64"
           },

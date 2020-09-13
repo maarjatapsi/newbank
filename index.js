@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 // const jwt = require('jsonwebtoken');
-//const swaggerUi = require('swagger-ui-express');
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./doc/swagger.json');
 const dotenv = require('dotenv');
 //const { body, validationResult } = require('express-validator');
@@ -10,7 +10,7 @@ dotenv.config();
 
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.1dazt.mongodb.net/${process.env.MONGO_COLLECTION}?retryWrites=true&w=majority`;
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -46,11 +46,11 @@ app.post('/users', [
   }).then(user => res.json(user));
 });
 
-
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/');
-
 */
+//app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//app.use('/');
+
+
 
 app.use(bodyParser.json());
 
@@ -60,7 +60,8 @@ const usersRoute = require('./routes/users');
 app.use('/users', usersRoute);
 
 //routes
-app.post('/', (req, res) => {
+
+app.get('/', (req, res) => {
   res.send('We are on home');
 });
 
