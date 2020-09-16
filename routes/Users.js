@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Account = require('../models/Account');
 const { check,validationResult } = require('express-validator');
 
 
@@ -21,8 +22,10 @@ router.post('/', async (req, res) => {
         username: req.body.username,
         password: req.body.password
     });
+    const account = new Account({ user: user._id, balance: 0 });
     try {
         const savedUser = await user.save();
+        const savedAccount = await account.save();
         res.json(savedUser);
     } catch (err) {
         res.json({message: err });
