@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./doc/swagger.json');
 const dotenv = require('dotenv');
+const {RequestHeadersHaveCorrectContentType, RequestBodyIsValidJson, enableCORS} = require('./middlewares')
 const User = require('./models/User');
 //Import Routes
 const usersRoute = require('./routes/users');
@@ -58,19 +59,19 @@ app.use(async (req, res, next) => {
   }
 });
 //app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(enableCORS);
+app.use(RequestHeadersHaveCorrectContentType);
 
 
 
-app.use('/users', usersRoute);
-app.use('/sessions', sessionsRoute);
-app.use('/accounts', accountsRoute);
 
 //routes
-
 app.get('/', (req, res) => {
   res.send('We are on home');
 });
-
+app.use('/users', usersRoute);
+app.use('/sessions', sessionsRoute);
+app.use('/accounts', accountsRoute);
 
 // Listening to the server
 app.listen(port, () => {

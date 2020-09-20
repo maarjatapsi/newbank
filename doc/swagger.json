@@ -42,30 +42,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Username already exists",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": "Username or password is missing"
+                  "$ref": "#/components/schemas/UserRegistered"
                 }
               }
             }
           },
-          "401": {
-            "description": "Username already exists",
+          "400": {
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
-                  "error": "Username already exist"
+                  "error": "Error description here"
                 }
               }
             }
@@ -103,12 +97,17 @@
             }
           },
           "400": {
-            "description": "Invalid username supplied",
-            "content": {}
-          },
-          "404": {
-            "description": "Balance not found",
-            "content": {}
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Error description here"
+                }
+              }
+            }
           }
         }
       }
@@ -147,9 +146,18 @@
             "description": "Successful",
             "content": {}
           },
-          "404": {
-            "description": "Something went wrong",
-            "content": {}
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Error description here"
+                }
+              }
+            }
           }
         }
       }
@@ -184,27 +192,14 @@
             }
           },
           "400": {
-            "description": "Missing username or password",
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "example": {
-                  "error": "Missing username or password"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid username or password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                },
-                "example": {
-                  "error": "Invalid username or password"
+                  "error": "Error description here"
                 }
               }
             }
@@ -258,37 +253,12 @@
         ],
         "type": "object",
         "properties": {
-          "user": {
-            "required": [
-              "_id",
-              "username",
-              "token",
-              "name"
-            ],
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "token": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            }
+          "token": {
+            "type": "string"
           }
         },
         "example": {
-          "user": {
-            "_id": "23",
-            "username": "user1",
-            "token": "9f8e22760d6a96881f9450ce4fb82e27",
-            "name": "Bob"
-          }
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjU4YmNjNjFiM2E3MTViZDAwZTI4NjQiLCJpYXQiOjE2MDA2MDE1MTcsImV4cCI6MTYwMDY4NzkxN30.N81CP-qA4L8lZ75Mmxpgyvz8HjJsRWOeYKVtGtK0PKw"
         }
       },
       "ErrorResponse": {
@@ -318,6 +288,41 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "UserRegistered": {
+        "required": [
+          "_id",
+          "name",
+          "username",
+          "password",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "user": {
+            "_id": "23",
+            "username": "user1",
+            "token": "9f8e22760d6a96881f9450ce4fb82e27",
+            "name": "Bob"
           }
         }
       },

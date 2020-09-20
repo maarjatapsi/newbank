@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Account = require('../models/Account');
 const { check,validationResult } = require('express-validator');
+const e = require('express');
 
 
 //gets back all the users
@@ -27,8 +28,10 @@ router.post('/', async (req, res) => {
         const savedUser = await user.save();
         const savedAccount = await account.save();
         res.json(savedUser);
-    } catch (err) {
-        res.json({message: err });
+    } catch (e) {
+        res.statusCode = 400
+        //res.json({message: err });
+        res.json({error: e.message});
     }
 });
 
